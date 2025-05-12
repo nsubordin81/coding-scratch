@@ -49,7 +49,12 @@ all that I saw here was that there are collections of standard libraries availab
 there seems to be more to the versioning question `shoudl look that up`
 
 --
-Identify how clusters can be filtered to view those that are accessible by the user.  
+Identify how clusters can be filtered to view those that are accessible by the user.
+
+--
+this seems like you can only have acces to some clusters.
+
+--
 Describe how clusters are terminated and the impact of terminating a cluster.
 
 --
