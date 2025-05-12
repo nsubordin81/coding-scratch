@@ -18,8 +18,7 @@ Identify the improvement in data quality in the data lakehouse over the data lak
 
 --
 
-improvement in data quality is that now instead of boing through the ETL without any explicit structure, all of the data passes through the metadata and governance layer which enforces good data quality
---
+## improvement in data quality is that now instead of boing through the ETL without any explicit structure, all of the data passes through the metadata and governance layer which enforces good data quality
 
 Compare and contrast silver and gold tables, which workloads will use a bronze table as a source, which workloads will use a gold table as a source.  
 Identify elements of the Databricks Platform Architecture, such as what is located in the data plane versus the control plane and what resides in the customer’s cloud account.
@@ -29,11 +28,43 @@ Identify elements of the Databricks Platform Architecture, such as what is locat
 the control plane is where you have the notebooks and other aspects of interfacing with databricks, and then there is a compute/data plane that lives in the customer's cloud account. this is the business data owned by the customer in their private cloud hosted by some cloud provider. high level to me without checking the details is that all the things you do in the presentation layer with databricks live in the control plane and are managed by databricks, and then all of the things that need to happen to interact with object storage and store the output of computations and manage resources involved in the computations lives and are manged by customers in their private cloud space.
 
 --
-Differentiate between all-purpose clusters and jobs clusters.  
-Identify how cluster software is versioned using the Databricks Runtime.  
+Differentiate between all-purpose clusters and jobs clusters.
+
+--
+
+all purpose compute appears to be a dedicated cluster which is running all the time, not serverless? you have settings you figure out like the runtime environment version and the version of spark and scala that you are using. ther eis this thing called "photon acceleration" which is a way to accelerate the workload and reduce cost.
+
+the access mode controls whether your user experiences the cluster as a single user environment with unity catalog controlling the data, as a multi-user environment with unity catalog or as an un-isolated environment with no mandatory unity catalog.
+
+there are compute settings such as limiting what users can do with the cluster. this includes what libraries they can use, what options they can see, what settings they have,
+how much cost they can incur
+
+--
+Identify how cluster software is versioned using the Databricks Runtime.
+
+--
+
+all that I saw here was that there are collections of standard libraries available throiugh the runtimes, you have standard for running batch jobs or etls and different language support, then you have ML runtimes which have support for pytorch and tensorflow and sklearn ans such already built in. you also have photon which is for high volume in the area of maybe pedabytes of processing to accelerate those workflows..
+
+there seems to be more to the versioning question `shoudl look that up`
+
+--
 Identify how clusters can be filtered to view those that are accessible by the user.  
-Describe how clusters are terminated and the impact of terminating a cluster.  
-Identify a scenario in which restarting the cluster will be useful.  
+Describe how clusters are terminated and the impact of terminating a cluster.
+
+--
+you can terminate a cluster both through inactivity period setting in the cluster details page,
+from the top right of the cluster details next to the start and edit buttons
+from within a notebook, as a popout context from the cluster itself.
+
+## terminating a cluster just shuts it down ans stops it running. you can also delete if you have permissions that would get rid of the cluster permanently and you would have to recreate it from scratch later
+
+Identify a scenario in which restarting the cluster will be useful.
+
+--
+scenarios: compute cluster is overloaded or it is out of memory or it is acting in a strange way.
+
+--
 Describe how to use multiple languages within the same notebook.  
 Identify how to run one notebook from within another notebook.  
 Identify how notebooks can be shared with others.  
