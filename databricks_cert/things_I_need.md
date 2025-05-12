@@ -14,9 +14,21 @@ there are things data warehhouses and the structured data afford for like better
 
 --
 
-Identify the improvement in data quality in the data lakehouse over the data lake.  
+Identify the improvement in data quality in the data lakehouse over the data lake.
+
+--
+
+improvement in data quality is that now instead of boing through the ETL without any explicit structure, all of the data passes through the metadata and governance layer which enforces good data quality
+--
+
 Compare and contrast silver and gold tables, which workloads will use a bronze table as a source, which workloads will use a gold table as a source.  
-Identify elements of the Databricks Platform Architecture, such as what is located in the data plane versus the control plane and what resides in the customer’s cloud account.  
+Identify elements of the Databricks Platform Architecture, such as what is located in the data plane versus the control plane and what resides in the customer’s cloud account.
+
+--
+
+the control plane is where you have the notebooks and other aspects of interfacing with databricks, and then there is a compute/data plane that lives in the customer's cloud account. this is the business data owned by the customer in their private cloud hosted by some cloud provider. high level to me without checking the details is that all the things you do in the presentation layer with databricks live in the control plane and are managed by databricks, and then all of the things that need to happen to interact with object storage and store the output of computations and manage resources involved in the computations lives and are manged by customers in their private cloud space.
+
+--
 Differentiate between all-purpose clusters and jobs clusters.  
 Identify how cluster software is versioned using the Databricks Runtime.  
 Identify how clusters can be filtered to view those that are accessible by the user.  
