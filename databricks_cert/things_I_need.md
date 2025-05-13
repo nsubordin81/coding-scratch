@@ -215,6 +215,13 @@ even easier potentially is to use the catalog explorer to add an external file w
 ## Identify the benefits of ACID transactions
 
 **Your answer:**
+first the features. ACID is
+Atomicity - all operations within a transaction happen or don't as a unit
+Consistency - you are transforming the data from one valid state to another, not leaving things in an invalid state for a time
+Isolation - your transactions happening concurrently with other transactions aren't impacted by the state changes they are making wrt one another
+Durability - once data has been committed, it doesnt' change or disappear, it is there for the long haul
+
+these standards lead to the highest reliability you can have. you are fault tolerant because you have durable logs, you can guarantee that if a transaction succeeded the data is there
 
 ## Identify whether a transaction is ACID-compliant
 
