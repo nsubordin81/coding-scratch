@@ -27,21 +27,23 @@ all purpose clusters are long running, they are meant to be for things like note
 
 ## Identify how cluster software is versioned using the Databricks Runtime
 
-`not sure if I really have the answer to this one yet` what I do know is taht there are different types of runtimes that support different purposes for clusters. one ist he standard which is for most purposes. it contains prebuilt libraries for working with data in whatever of the supported langauges you want to work in. there is a scala version a spark version and an overall databricks version with each runtime. in addition to the standard flavor, there is the flavor for doing faster jobs, to accelerate the processing, this is called the photon processor. the next flavor after this is the ML flavor, and it supports machine learning with libraries pre installed like pytorch, tensorflow, and others like sklearn and scipy numpy and pandas. the runtimes make it so that you don't have to install a lot of packages when you work with a cluster, they are already there.
-
 **Your answer:**
+`not sure if I really have the answer to this one yet` what I do know is taht there are different types of runtimes that support different purposes for clusters. one ist he standard which is for most purposes. it contains prebuilt libraries for working with data in whatever of the supported langauges you want to work in. there is a scala version a spark version and an overall databricks version with each runtime. in addition to the standard flavor, there is the flavor for doing faster jobs, to accelerate the processing, this is called the photon processor. the next flavor after this is the ML flavor, and it supports machine learning with libraries pre installed like pytorch, tensorflow, and others like sklearn and scipy numpy and pandas. the runtimes make it so that you don't have to install a lot of packages when you work with a cluster, they are already there.
 
 ## Identify how clusters can be filtered to view those that are accessible by the user
 
 **Your answer:**
+there are a few ways. there is a search bar in the databricks UI that allows you to filter clusters by owner column. you can also use the databricks CLI in your shell to filter the json that comes from the databricks clusters get <id> command.
 
 ## Describe how clusters are terminated and the impact of terminating a cluster
 
 **Your answer:**
+termination of a cluster if you have the rights to do so can be done oa few differnet ways. first, you can terminate it with a button in the upper right of the scren when you are looking at the compute, then you can also terminate it by going into the cluster and then there is a context menu where you can see the different options available to you one of them is to terminate. I bet you could also do it through the CLI. termination is not the same as deletion. termination just shuts down the cluster so it isn't consuming resources, it can be started up again later. deletion actually wipes the cluster and its configuration gets removed.
 
 ## Identify a scenario in which restarting the cluster will be useful
 
 **Your answer:**
+you can restart a cluster when it runs out of memory or if it becomes corrupted in some way and is providing output that is not aligned to what you expect, maybe there is some residual data interfering with its function that is in memory or somewhere that is affecting the job output. you can restart from many of the same menus that you can terminate from.
 
 ## Describe how to use multiple languages within the same notebook
 
