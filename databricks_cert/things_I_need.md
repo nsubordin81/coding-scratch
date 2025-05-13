@@ -91,6 +91,7 @@ this feels like you can do it with a sql query against it, but haven't tried yet
 ## Identify the prefix included after the FROM keyword as the data type
 
 **Your answer:**
+is that the schema? I'm not sure what this is asking
 
 ## Create a view, a temporary view, and a CTE as a reference to a file
 
@@ -112,6 +113,10 @@ options { path ""
 header "true"
 }
 ```
+
+by default it will put it in the default schema
+
+even easier potentially is to use the catalog explorer to add an external file which can be3 a file from your filesystem and when you do that you whill have an option to automatically create a table from that file which will be dropped into the catalog explorer.
 
 ## Identify how the count if function and the count where x is null can be used
 
