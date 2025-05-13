@@ -49,6 +49,8 @@ you can restart a cluster when it runs out of memory or if it becomes corrupted 
 
 **Your answer:**
 
+Not related to this answer but I needed a bplace to put it, command or ctrl + option or alt + space will give you suggestions for how to finish sql queries or python code.
+
 ## Identify how to run one notebook from within another notebook
 
 **Your answer:**
