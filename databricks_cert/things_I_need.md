@@ -48,16 +48,22 @@ you can restart a cluster when it runs out of memory or if it becomes corrupted 
 ## Describe how to use multiple languages within the same notebook
 
 **Your answer:**
+you can use python scala, R, sql and even bash. you can also use the magic % sign with the name of the language you want to use e.g. the bash or shell is hidden within the python one with !ls
+the other notebook magic are %r, %scala %python %sql %md
 
 Not related to this answer but I needed a bplace to put it, command or ctrl + option or alt + space will give you suggestions for how to finish sql queries or python code.
+
+the default language of the notebook is set at the top of the notebook, all new code cells will use that language first and then you would switch it.
 
 ## Identify how to run one notebook from within another notebook
 
 **Your answer:**
+first of all, it is beneficial to organize your notebooks in your workspace under different directories. when you do this you can reference them by location relative to other notebooks in the workspace.
 
 ## Identify how notebooks can be shared with others
 
 **Your answer:**
+there is a share button in the intervface. there are differennt levels of access you can choose, like view which is read only, run which allows to run the notebook but not edit it, edit, or manage which allows people to change which cluster it runs with and delete it etc. you can choose individuals or roles in the system that are allowed to do the things, roles would be like admin.
 
 ## Describe how Databricks Repos enables CI/CD workflows in Databricks
 
@@ -66,16 +72,21 @@ Not related to this answer but I needed a bplace to put it, command or ctrl + op
 ## Identify Git operations available via Databricks Repos
 
 **Your answer:**
+guessing add, commit, push, not sure which wouldn't be to be honest, would it be all standard git terminal commands? are there any missing `look this up`
 
 ## Identify limitations in Databricks Notebooks version control functionality relative to Repos
 
 **Your answer:**
+a databricks notebook is more like autosave I imagine, where a state of your notebook is automatically saved at some point while you work on it and you can only recover from those snapshots. it is also harder to share older versions of a notebook with someone potentially because you can only save that notebook in its version without saving the entire contents of the directory the notebook is in. if you want to version an entire directory and all objects contained within it the way you would with git, that is only avaiable through version control. you wouldn't synchronize the version history of one notebook with another and have one commit to represent the state of all objects at that point in time.
 
 # Section 2: ELT with Apache Spark
 
 ## Extract data from a single file and from a directory of files
 
 **Your answer:**
+one thing you can do is open the terminal and use linux commands to navigate the databricks file system /dbfs/
+
+this feels like you can do it with a sql query against it, but haven't tried yet not as sure of the anatomy. keep having to start a data warehouse to figure it out. a bit worried about a slap on the wrist for that.
 
 ## Identify the prefix included after the FROM keyword as the data type
 
@@ -92,6 +103,15 @@ Not related to this answer but I needed a bplace to put it, command or ctrl + op
 ## Create a table from a JDBC connection and from an external CSV file
 
 **Your answer:**
+I think based on my training that you can do this with the sql editor and the catalog explorer. find reference to the table in the external filesystem by path and then use a create table command in the sql editor targeting this path and with 'using csv' with {} around the path. e..g.
+
+```
+create table my_aweseome_table
+using csv
+options { path ""
+header "true"
+}
+```
 
 ## Identify how the count if function and the count where x is null can be used
 
@@ -426,3 +446,7 @@ Not related to this answer but I needed a bplace to put it, command or ctrl + op
 ## Identify the segregation of business units across catalog as best practice
 
 **Your answer:**
+
+```
+
+```
