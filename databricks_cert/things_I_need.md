@@ -211,6 +211,7 @@ even easier potentially is to use the catalog explorer to add an external file w
 ## Identify where Delta Lake provides ACID transactions
 
 **Your answer:**
+first of all, delta lake is a new automated etl pipelining tool that is declarative and automates portions fo data pipelining, helping to address some of the issues that existed with the prior data warehousing etl challenges, including messy and specific and brittle pipelines that were more imperative and manual and contained a lot of custom manual coding to patch them togetehr, were not flexible to doing stream and batch processing as alternatives.
 
 ## Identify the benefits of ACID transactions
 
@@ -226,6 +227,7 @@ these standards lead to the highest reliability you can have. you are fault tole
 ## Identify whether a transaction is ACID-compliant
 
 **Your answer:**
+well I assume I'd use the above criteria to see if the transaction was able to meet it.
 
 ## Compare and contrast data and metadata
 
@@ -274,6 +276,11 @@ these standards lead to the highest reliability you can have. you are fault tole
 ## Identify why Zordering is beneficial to Delta Lake tables
 
 **Your answer:**
+if you ahve a high cardinality to your data, similar data will be stored nearby other similar data, ther eis less overall data to traverse for the delta lake in order to retrieve it, your queries will be faster, and it is an incremental process so you can rerun it after data is added and it will only impact the new records and associations back to historical data.
+
+I don't know where this fits in so I will just write it here. htere are delta live tables or maybe just pipielins now which are ways to set up workflows using the delta lake. you can set up the type of job, whether it is development or production, what cluster it will use, whether it will be continuous or triggered by some event, and what table the ingest will go to. you then have a way to look at your pipelines and see what type of job it is that is feeding your tables, and inspect the portions of the ETL that you are doing and what the outputs are and where they go to.
+
+similarly with delta live tables, you have different components, like bronze, silver and gold.
 
 ## Identify how vacuum commits deletes
 
