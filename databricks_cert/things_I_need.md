@@ -4,9 +4,12 @@
 
 **Your answer:**
 
+data warehouse was a traditional way of running thigns in the past, it is useful especially for running large ETL jobs that output structured data. it is not as flexible for things like general purpose analytics with unstructured data, data exploration at scale that kind of thing. the data lake kind of has become a different architecture that allows data to be completely unstructured and is more flexible for doing work with data that doesn't require a structured output, but it lacks the governance and structure and controls and explicit schema of a data warehose. the data lakehose marries these two concepts with a metadata and governance layer that abstracts between all of the compute and the interactions so ML and analysis work from a customer lives alongside etl jobs and batch processign work and they both go through the same data quality checks but they can be flexible to support less structure in the data during and after processing.
+
 ## Identify the improvement in data quality in the data lakehouse over the data lake
 
 **Your answer:**
+the improvement would be the metadata and access layer. `note to self look this up and be able to articulate it better, you still haven't grokked it`
 
 ## Compare and contrast silver and gold tables, which workloads will use a bronze table as a source, which workloads will use a gold table as a source
 
@@ -15,10 +18,12 @@
 ## Identify elements of the Databricks Platform Architecture, such as what is located in the data plane versus the control plane and what resides in the customer’s cloud account
 
 **Your answer:**
+the 'data plane' is also I thinkt he compute plane which is what the customer's cloud account holds. it is actually the cloud resources that are providing the storage and the compute, they are managed and owned by the customer. this means that the vendor, databricks and amazon or azure or whoever, is already guaranteeing that the business sensitive data resides in an area totally managed byt he customer, and they have control and ownership for what they are working with. the control plan is where the batch and etl jobs, the cluster management, the notebooks, all of the things that I guess you would consider presentation are living. databricks manages that part, which is quite a bit to abstract away from the ucustomer, how spark and databricks interfaces interact with the cloud computer resources. the outputs are also on the compute plane so data only lives in the control plane as long as it needs to be stored in memory. `note you don't know exactly where the boundary is here`
 
 ## Differentiate between all-purpose clusters and jobs clusters
 
 **Your answer:**
+all purpose clusters are long running, they are meant to be for things like notebooks that live a while with the data, jobs that are shared by many users. they will have maybe less memory and compute power because they will be running and incurring cost longer, they are for data exploration and availability. job clusters are for things like bartch jobs and etls that run and then automatically stop and clean themselves up, they are configured for one, narrow job.
 
 ## Identify how cluster software is versioned using the Databricks Runtime
 
