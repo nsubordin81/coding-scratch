@@ -100,6 +100,7 @@ is that the schema? I'm not sure what this is asking
 ## Identify that tables from external sources are not Delta Lake tables
 
 **Your answer:**
+the 'type' field in the details will be 'Managed' for a delta lake table, it will be 'EXTERNAL' for an external table not managed by delta lake.
 
 ## Create a table from a JDBC connection and from an external CSV file
 
