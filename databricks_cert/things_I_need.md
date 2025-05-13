@@ -27,6 +27,8 @@ all purpose clusters are long running, they are meant to be for things like note
 
 ## Identify how cluster software is versioned using the Databricks Runtime
 
+`not sure if I really have the answer to this one yet` what I do know is taht there are different types of runtimes that support different purposes for clusters. one ist he standard which is for most purposes. it contains prebuilt libraries for working with data in whatever of the supported langauges you want to work in. there is a scala version a spark version and an overall databricks version with each runtime. in addition to the standard flavor, there is the flavor for doing faster jobs, to accelerate the processing, this is called the photon processor. the next flavor after this is the ML flavor, and it supports machine learning with libraries pre installed like pytorch, tensorflow, and others like sklearn and scipy numpy and pandas. the runtimes make it so that you don't have to install a lot of packages when you work with a cluster, they are already there.
+
 **Your answer:**
 
 ## Identify how clusters can be filtered to view those that are accessible by the user
