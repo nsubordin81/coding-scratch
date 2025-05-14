@@ -415,10 +415,12 @@ failed based on that type of failure if you ahve a proogrammatic way of proceedi
 ## Set up a retry policy in case of failure
 
 **Your answer:**
+seems pretty easy. go into the job, go into the tasks flow, find a task that you want to create a retry policy for, there is a retries button there is a configuraiton dialog wyou can set up the number of times and the backoff in a gui, you can have unlimited, you can also check a box for retry on time-out.
 
 ## Create an alert in the case of a failed task
 
 **Your answer:**
+there is a notifications optiojn above the retries option where you can set the notification channels destinations configured by your workspace administrator, you can set up whether the notification is for failure, for something happening for a duration, for startingt or successful completion or failure, or ran too long or streaming backlog though I don't know that that means. if you skip a run or cancel it it you can notify or opt to not notify, and you can wait to notify until the last task retry. bytes of unconsumed data across all streams, so that is a big backlogt of streams, or files or records. so kind of like if kafka was not getting things across fast enough.
 
 ## Identify that an alert can be sent via email
 
