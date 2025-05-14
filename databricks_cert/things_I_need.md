@@ -384,6 +384,7 @@ similarly with delta live tables, you have different components, like bronze, si
 ## Identify the benefits of using multiple tasks in Jobs
 
 **Your answer:**
+you can change the type of cluster runtime, library dependencies for a task at the task level. you can get more granular feedback for where in a job a failure occurs because there are dependencies based on tasks, you can isolate the workload being taken on and potentially resume jobs from tasks that haven't completed, you can potentially have tasks take place concurrently within a workflow.
 
 ## Set up a predecessor task in Jobs
 
@@ -396,14 +397,17 @@ similarly with delta live tables, you have different components, like bronze, si
 ## Review a task's execution history
 
 **Your answer:**
+` I feel like I learned this from the jobs overview but I don't remember what it is`
 
 ## Identify CRON as a scheduling opportunity
 
 **Your answer:**
+you can use CRON syntax for scheduling dashboards or jobs. I'm not sure what this is revereing to other than using CRON language to schedule jobs for recurrent tasks.
 
 ## Debug a failed task
 
 **Your answer:**
+debugging failed tasks would happen in the more detailed job runs screen where you can view the error log output for the task and troubleshoot from there.
 
 ## Set up a retry policy in case of failure
 
