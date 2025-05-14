@@ -409,6 +409,9 @@ you can use CRON syntax for scheduling dashboards or jobs. I'm not sure what thi
 **Your answer:**
 debugging failed tasks would happen in the more detailed job runs screen where you can view the error log output for the task and troubleshoot from there.
 
+you can navigate to teh task level from a job that failed and you can even set up an if/else follow on condition that has different branches for handling success or failure after a task has
+failed based on that type of failure if you ahve a proogrammatic way of proceeding.
+
 ## Set up a retry policy in case of failure
 
 **Your answer:**
