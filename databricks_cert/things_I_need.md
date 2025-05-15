@@ -539,3 +539,7 @@ delta lake is a storage frameowrk for databricks that helps with some data lake 
 what problems?
 data lakes can have inconsistency (makes sense they are typically BASE not ACID transactions)
 data lakes can have performance problems
+
+while delta lake is not a format but a framework, delta table is a format and it is the default schema used for spark sql in databricks.
+
+when you execute an insert statement, you are (language is important here for correctness) "adding a new parquet file to the delta table directory for your table."
