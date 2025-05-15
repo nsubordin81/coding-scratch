@@ -6,10 +6,13 @@
 
 data warehouse was a traditional way of running thigns in the past, it is useful especially for running large ETL jobs that output structured data. it is not as flexible for things like general purpose analytics with unstructured data, data exploration at scale that kind of thing. the data lake kind of has become a different architecture that allows data to be completely unstructured and is more flexible for doing work with data that doesn't require a structured output, but it lacks the governance and structure and controls and explicit schema of a data warehose. the data lakehose marries these two concepts with a metadata and governance layer that abstracts between all of the compute and the interactions so ML and analysis work from a customer lives alongside etl jobs and batch processign work and they both go through the same data quality checks but they can be flexible to support less structure in the data during and after processing.
 
+data lakehouse combines the good governance and performance of a data warehouse with the openness, flexibility and machine learning support of a data lake.
+
 ## Identify the improvement in data quality in the data lakehouse over the data lake
 
 **Your answer:**
 the improvement would be the metadata and access layer. `note to self look this up and be able to articulate it better, you still haven't grokked it`
+but maybe this is enough, data governance.
 
 ## Compare and contrast silver and gold tables, which workloads will use a bronze table as a source, which workloads will use a gold table as a source
 
@@ -19,6 +22,8 @@ the improvement would be the metadata and access layer. `note to self look this 
 
 **Your answer:**
 the 'data plane' is also I thinkt he compute plane which is what the customer's cloud account holds. it is actually the cloud resources that are providing the storage and the compute, they are managed and owned by the customer. this means that the vendor, databricks and amazon or azure or whoever, is already guaranteeing that the business sensitive data resides in an area totally managed byt he customer, and they have control and ownership for what they are working with. the control plan is where the batch and etl jobs, the cluster management, the notebooks, all of the things that I guess you would consider presentation are living. databricks manages that part, which is quite a bit to abstract away from the ucustomer, how spark and databricks interfaces interact with the cloud computer resources. the outputs are also on the compute plane so data only lives in the control plane as long as it needs to be stored in memory. `note you don't know exactly where the boundary is here`
+
+so the architecture consists of the cloud infrastructure which could be any of the 3 major providers, aws, google or azure. that is where databricks provisions the nodes, this is part of the data plane, the nodes in the cluster are all built with the components of the databricks runtime which includes thingns like spark and delta lake. that is bundled into the node as software. this is still the data plane. the control plane lives on top of that and is where you interact with databricks. it has notebooks, workspaces, jobs, batch and etl, and dashboards and the like. this is also where you ahve cluster manager, workflow management interfaces.
 
 ## Differentiate between all-purpose clusters and jobs clusters
 
@@ -425,6 +430,7 @@ there is a notifications optiojn above the retries option where you can set the 
 ## Identify that an alert can be sent via email
 
 **Your answer:**
+yep, I see it there in the list of potential destinations
 
 # Section 5: Data Governance
 
