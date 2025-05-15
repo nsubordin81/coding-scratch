@@ -25,6 +25,8 @@ the 'data plane' is also I thinkt he compute plane which is what the customer's 
 
 so the architecture consists of the cloud infrastructure which could be any of the 3 major providers, aws, google or azure. that is where databricks provisions the nodes, this is part of the data plane, the nodes in the cluster are all built with the components of the databricks runtime which includes thingns like spark and delta lake. that is bundled into the node as software. this is still the data plane. the control plane lives on top of that and is where you interact with databricks. it has notebooks, workspaces, jobs, batch and etl, and dashboards and the like. this is also where you ahve cluster manager, workflow management interfaces.
 
+the data plane is storage (databricks file system) and computer (virtual machines and clusters) it will use the subscriber's cloud account to provision.
+
 ## Differentiate between all-purpose clusters and jobs clusters
 
 **Your answer:**
@@ -485,3 +487,10 @@ yep, I see it there in the list of potential destinations
 ```
 
 ```
+
+# Extra STuff to know
+
+- databricks is based on Spark, made by the same folks
+- databricks is a distributed data processing platform which is what spark is too
+- it is also an in-memory processing platform, spark is that, databricks is still that. so it is more performant than, say, mapreduce
+- databricks file system is an abstraction for persistent storage. dbfs let's you deal with files in teh cluster in a distributed and shared manner among nodes, however, even though the representation of these files in dbfs makes it look like theya re stored in the cluster, they are actually stored in persistent cloude storage in your cloud provider's object storage solution.
