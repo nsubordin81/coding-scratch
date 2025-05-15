@@ -101,10 +101,14 @@ there is a share button in the intervface. there are differennt levels of access
 **Your answer:**
 guessing add, commit, push, not sure which wouldn't be to be honest, would it be all standard git terminal commands? are there any missing `look this up`
 
+actual answer form the course seems to be you can create new branches, you can pull from github origin, you can commit changes to a branch. merging appears to only be done via the remote git repository.
+
 ## Identify limitations in Databricks Notebooks version control functionality relative to Repos
 
 **Your answer:**
 a databricks notebook is more like autosave I imagine, where a state of your notebook is automatically saved at some point while you work on it and you can only recover from those snapshots. it is also harder to share older versions of a notebook with someone potentially because you can only save that notebook in its version without saving the entire contents of the directory the notebook is in. if you want to version an entire directory and all objects contained within it the way you would with git, that is only avaiable through version control. you wouldn't synchronize the version history of one notebook with another and have one commit to represent the state of all objects at that point in time.
+
+so after going nover this in the course I'm taking now, can confirm I was more or less right. there is an autosave and version history feature ffor notebooks built into databricks, which allows someone to delete history files from anywhere int he history and doesn't support branching or merging, it just creates a fresh copy of the file periodically during changes which is not explicitly managed. you can go to history but you don't have the amount of control you get with git's distrubuted version control, nor do you have the safety that the files are actually backed up.
 
 # Section 2: ELT with Apache Spark
 
@@ -240,6 +244,8 @@ even easier potentially is to use the catalog explorer to add an external file w
 
 **Your answer:**
 first of all, delta lake is a new automated etl pipelining tool that is declarative and automates portions fo data pipelining, helping to address some of the issues that existed with the prior data warehousing etl challenges, including messy and specific and brittle pipelines that were more imperative and manual and contained a lot of custom manual coding to patch them togetehr, were not flexible to doing stream and batch processing as alternatives.
+
+ok, here is the real answer I believe. the ACID transactions happen in the delta lake's writer process, which writes the table contents to parquet files and then writes the transaction information like predicates and `other information` to the transaction log as a json file.
 
 ## Identify the benefits of ACID transactions
 
@@ -525,3 +531,11 @@ you can do a multi node or single node cluster
 - you pay in DBUs which are right now priced at $0.40 / hr .
 - if you do multi node you can configure compute to be the same or different form the driver node in terms of VM power, and you can set up max and min scale for how many nodes to autoscale with
 - community edition doesn't let you configure all these things it just lets you pick the runtime and defaults your computer to a standard value
+
+## what and why delta lake?
+
+delta lake is a storage frameowrk for databricks that helps with some data lake problems.
+
+what problems?
+data lakes can have inconsistency (makes sense they are typically BASE not ACID transactions)
+data lakes can have performance problems
