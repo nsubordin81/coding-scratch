@@ -122,7 +122,7 @@ this feels like you can do it with a sql query against it, but haven't tried yet
 ## Identify the prefix included after the FROM keyword as the data type
 
 **Your answer:**
-is that the schema? I'm not sure what this is asking
+is that the schema? I'm not sure what this is asking it seems like this is the table name, after from it woudl typically be 'schema.tablename' but maybe spark sql is different.
 
 ## Create a view, a temporary view, and a CTE as a reference to a file
 
@@ -543,3 +543,10 @@ data lakes can have performance problems
 while delta lake is not a format but a framework, delta table is a format and it is the default schema used for spark sql in databricks.
 
 when you execute an insert statement, you are (language is important here for correctness) "adding a new parquet file to the delta table directory for your table."
+
+## more stuff about delta lake.
+
+parquet file are immutable and the engine just appends them and then uses the transaction log to derive the current state. it is very event sourcing remeniscient.
+you will have appends. it will only make one parquet for a single insert query with several records, but for update queries you will have one parquet file appended per updated record.
+older file updates will become obselete and the engine will know which ones to review in order to build current state based on if the transactions in those files are still relevant.
+I think for the example he showed it was supposed to show that there were 4 files before and after the update because we added two for the update but then we didn't need the other 2 insertion ones anymore since those records had since changed. so it is keeping track of the deltas.
