@@ -494,3 +494,14 @@ yep, I see it there in the list of potential destinations
 - databricks is a distributed data processing platform which is what spark is too
 - it is also an in-memory processing platform, spark is that, databricks is still that. so it is more performant than, say, mapreduce
 - databricks file system is an abstraction for persistent storage. dbfs let's you deal with files in teh cluster in a distributed and shared manner among nodes, however, even though the representation of these files in dbfs makes it look like theya re stored in the cluster, they are actually stored in persistent cloude storage in your cloud provider's object storage solution.
+
+## cluster config
+
+you can do a multi node or single node cluster
+
+- for multi-node you can choose to let other acces but you are restricted to python and spark sql languages
+- dedicated is using it by yourself
+- you can pick a node type which determines how much compute you get
+- you pay in DBUs which are right now priced at $0.40 / hr .
+- if you do multi node you can configure compute to be the same or different form the driver node in terms of VM power, and you can set up max and min scale for how many nodes to autoscale with
+- community edition doesn't let you configure all these things it just lets you pick the runtime and defaults your computer to a standard value
