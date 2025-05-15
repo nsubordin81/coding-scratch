@@ -55,6 +55,9 @@ you can restart a cluster when it runs out of memory or if it becomes corrupted 
 ## Describe how to use multiple languages within the same notebook
 
 **Your answer:**
+
+This whole thing I describe below are known as 'magic commands' they let you express yourself in a different language than the default one of the notebook. they are like escape sequences to tell whatever is interpreting your code you want to do something different.
+
 you can use python scala, R, sql and even bash. you can also use the magic % sign with the name of the language you want to use e.g. the bash or shell is hidden within the python one with !ls
 the other notebook magic are %r, %scala %python %sql %md
 
@@ -66,6 +69,23 @@ the default language of the notebook is set at the top of the notebook, all new 
 
 **Your answer:**
 first of all, it is beneficial to organize your notebooks in your workspace under different directories. when you do this you can reference them by location relative to other notebooks in the workspace.
+
+but that isn't the answer. to run notebooks from other notebooks there is a special magic command called `%run`. you can use this to import another notebook by absolute or relative path into your current notebook. any functions or variables or classes you declare in that notebook becomes available in the notebook that imports it.
+
+another magicd command not gone over in the test criteria but is good to know about is %fs. you can list the contents of diretories with it %fs ls <directory as string>
+
+you can also use dbutils for this. but dbutils can do a ton more. it can do
+
+- credentials management
+- filesystem stuff
+- dataset understanding (I guess descriptive stats and stuff)
+- managing jobs
+- managing sesison isolated libraries, not quite sure what those are
+- something about input widgets
+- a bunch of experimental stuff that they want to support like interacting with a host computer and impact notebook control flow and preview stuff.
+
+if I had to sum it up I would say that filesystem utilities and secrets management utilities are the most important and official capabilities of these utilities
+and they are bgetter than the magic commands because they can interact with python you can send their output as input to python functions directly.
 
 ## Identify how notebooks can be shared with others
 
