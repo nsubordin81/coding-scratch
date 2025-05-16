@@ -599,6 +599,8 @@ When you create a table with a typical `CREATE TABLE` statement, it is stored in
 
 If you create a table within a specified schema, the Hive metastore will create a subdirectory for that schema in the warehouse directory, with the schema name suffixed by `.db`. For example, creating a schema named `sales` will result in a directory `/user/hive/warehouse/sales.db`, and all tables within that schema will be nested inside this directory.
 
-Additionally, you can specify a custom path in DBFS as part of your `CREATE TABLE` statement. In this case, the table's metadata will still reside in the Hive metastore, but the table's data will be stored in the specified location, outside the default `/user/hive/warehouse` path.
+Additionally, you can specify a custom path in DBFS as part of your `CREATE TABLE` statement. In this case, the table's metadata will still reside in the Hive metastore, but the table's data will be stored in the specified location, outside the default `/user/hive/warehouse` path. you do this with the `location` keyword in the create schema statement, specifying the path you can to create in dbfs
 
-so let's
+### external tables and managed tables:
+
+conceptual difference, managed tables are cases where the underlying table data is stored in dbfs through a create table statement that didn't specify an alternative location, so the location is synced between the table metadata in the hive metastore and the underlying dbfs. if you drop a managed table, the undlerlying data will be dropped too by databricks. external tables have underlying data that doesn't live in the schema directory on dbfs that corresponds to the metastore's schema. if you drop an external table, the hive metastore data gets dropped, but the underlying data in dbfs is retained.
