@@ -592,3 +592,13 @@ once you garbage collect, you can't restore any more.
 ### relational storage active recall
 
 relational storage in databricks is done with metadata in the hive metastore
+
+instead of being stored as tables, the data is stored as metadata in this metastore and then you get data that corresponds to it living in the databricks file system. the dbfs woudl be overlaid on whatever cloud provider object storage solution you have.
+
+When you create a table with a typical `CREATE TABLE` statement, it is stored in the central Hive metastore. By default, the table's metadata is placed in the `default` database (which is also a schema), and the corresponding data is stored in the `/user/hive/warehouse` directory on the Databricks File System (DBFS).
+
+If you create a table within a specified schema, the Hive metastore will create a subdirectory for that schema in the warehouse directory, with the schema name suffixed by `.db`. For example, creating a schema named `sales` will result in a directory `/user/hive/warehouse/sales.db`, and all tables within that schema will be nested inside this directory.
+
+Additionally, you can specify a custom path in DBFS as part of your `CREATE TABLE` statement. In this case, the table's metadata will still reside in the Hive metastore, but the table's data will be stored in the specified location, outside the default `/user/hive/warehouse` path.
+
+so let's
