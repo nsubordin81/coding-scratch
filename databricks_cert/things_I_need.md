@@ -635,4 +635,4 @@ constraints must already be met by all existing data in the table if not empty
 
 new data that fails constrints will result in write failure
 
-syntax is `alter table` table ` add constraint` constraint name and then column name ` check` condition
+syntax is `alter table` table ` add constraint` constraint name ` check` condition
