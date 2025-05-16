@@ -613,3 +613,7 @@ CREATE SCHEMA and CREATE DATABASE are the same in databricks, do the same thing,
 
 describe extended defaults ot describing tables, you can also do `describe database extended` to describe a schema/database in hive
 remember that foldersin dbfs that are schemas get a .db at the end by convention in databricks, databricks does this foer you
+
+ok, so just did a bunch of drills on this and feelaing pretty comfortable with it now
+
+one key thing I learned is that the managed tables vs. external tables thing transcends location in dbfs, but not usage of the `location` keyword. accidental experiment confirmed you can use the location keyword and specify the exact same location on dbfs that the managed woudl automatically save to, but it is still flagged as an external table and that still leads to it retaining the data when you drop the table and only dropping the metadata.
