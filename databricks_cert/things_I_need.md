@@ -617,3 +617,22 @@ remember that foldersin dbfs that are schemas get a .db at the end by convention
 ok, so just did a bunch of drills on this and feelaing pretty comfortable with it now
 
 one key thing I learned is that the managed tables vs. external tables thing transcends location in dbfs, but not usage of the `location` keyword. accidental experiment confirmed you can use the location keyword and specify the exact same location on dbfs that the managed woudl automatically save to, but it is still flagged as an external table and that still leads to it retaining the data when you drop the table and only dropping the metadata.
+
+### ctas statements
+
+this is createing a table by getting query results form another table.
+you can't specify schema info, that is, you can't assign datatypes to the columns in the query, it has to be inferred
+you can add things like `comments` `partitioned by` and `location` to specify information about how the underlying data fo the newly created table should be stored and described
+these are created with the data, not insert statements, you ren't just createing the ttable schema you care3 createing the data from the other table pulled in also
+
+### constraints
+
+you can add constratints to existing delta tables
+
+you can only add `not null` and `check` constraints. `check` uses condotionals that are like where clauses
+
+constraints must already be met by all existing data in the table if not empty
+
+new data that fails constrints will result in write failure
+
+syntax is `alter table` table ` add constraint` constraint name and then column name ` check` condition
