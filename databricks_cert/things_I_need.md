@@ -636,3 +636,19 @@ constraints must already be met by all existing data in the table if not empty
 new data that fails constrints will result in write failure
 
 syntax is `alter table` table ` add constraint` constraint name ` check` condition
+
+### deep and shallow cloning of delta tables
+
+syntax is super easy
+`create table` clone table name
+`deep copy` source table name
+
+or
+`shallow copy` source table name
+
+the difference between them: deep copy creates a copy of all underlying data
+shallow copy only creates copy of the delta transaction logs for the table, no data is being copied, much faster
+
+deep copi es for large tables can take a really long time, but htey can be done incrementally and pick up changes as they are being made in flight
+
+important point, you never risk data in the source tables getting corrupted or overwritten while doing these, because in both cases they clone in a different location than the source tables.
