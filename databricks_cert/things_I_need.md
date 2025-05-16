@@ -556,6 +556,39 @@ the history command as it turns out for a delta table
 
 let's just enumerage important commands I learned:
 
-explain detail employee
+describe detail <table>
+describe history <table> - see how the json log evolved over time indicating how the parquet files were restructured for versions
 
-describe history employee
+%fs ls "databricks filesystem location" - look at the files
+
+there are advanced features of delta lake involving time machine, in other words being able to query the version history or the timestamp of earlier states of teh delta table
+the syntax for that is
+
+timestamp as of
+version as of <number>
+
+you can also use restore to get things back from an earlier version:
+
+restore table <tablename> to @v
+restore table <tablename> to version as of
+restore table <tablename> to timestamp as of
+
+you can also optimize the parquet files. it is generally bad for performance to have several small parquets with individual operations/transactions represented in each. optimize will consolidate them into a single parquet.
+
+when you use zorder by <column name> , you can bucket the resulting parquets such that records with similar data for that column are closer together, which will optimize read performance by a whole lot.
+
+and when you konw things are out of date, you can vacuum to garbage collect old parquets you don' tneed anymore
+
+vacuum <tablename> <retention period>
+
+default retention policy is 7 days so if you don't specify one it tries that one and it can't be younger change than that or it won't do anything
+
+to go lower than that you need to do an alter table on your table and use a spark configuration param to set the retention duration to a lower amount. this should really never be done execpt in very special circumstances or with test data you aren't worried about losing.
+
+we are talking about hard deleting data from a system that is pretty much event sourced, which is a dangerous operation.
+
+once you garbage collect, you can't restore any more.
+
+### relational storage active recall
+
+relational storage in databricks is done with metadata in the hive metastore
