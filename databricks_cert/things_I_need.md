@@ -604,3 +604,12 @@ Additionally, you can specify a custom path in DBFS as part of your `CREATE TABL
 ### external tables and managed tables:
 
 conceptual difference, managed tables are cases where the underlying table data is stored in dbfs through a create table statement that didn't specify an alternative location, so the location is synced between the table metadata in the hive metastore and the underlying dbfs. if you drop a managed table, the undlerlying data will be dropped too by databricks. external tables have underlying data that doesn't live in the schema directory on dbfs that corresponds to the metastore's schema. if you drop an external table, the hive metastore data gets dropped, but the underlying data in dbfs is retained.
+
+useful, `describe extended <tablename> ` gives you more table information
+
+'MANAGED' and 'EXTERNAL'
+
+CREATE SCHEMA and CREATE DATABASE are the same in databricks, do the same thing, both are creating directories in the hive metastore and hive warehouse
+
+describe extended defaults ot describing tables, you can also do `describe database extended` to describe a schema/database in hive
+remember that foldersin dbfs that are schemas get a .db at the end by convention in databricks, databricks does this foer you
