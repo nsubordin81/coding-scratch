@@ -550,3 +550,12 @@ parquet file are immutable and the engine just appends them and then uses the tr
 you will have appends. it will only make one parquet for a single insert query with several records, but for update queries you will have one parquet file appended per updated record.
 older file updates will become obselete and the engine will know which ones to review in order to build current state based on if the transactions in those files are still relevant.
 I think for the example he showed it was supposed to show that there were 4 files before and after the update because we added two for the update but then we didn't need the other 2 insertion ones anymore since those records had since changed. so it is keeping track of the deltas.
+
+in my case there was file compation so I couldn't properly deduce from numbe rof transactions.
+the history command as it turns out for a delta table
+
+let's just enumerage important commands I learned:
+
+explain detail employee
+
+describe history employee
