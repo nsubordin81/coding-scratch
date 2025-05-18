@@ -652,3 +652,28 @@ shallow copy only creates copy of the delta transaction logs for the table, no d
 deep copi es for large tables can take a really long time, but htey can be done incrementally and pick up changes as they are being made in flight
 
 important point, you never risk data in the source tables getting corrupted or overwritten while doing these, because in both cases they clone in a different location than the source tables.
+
+### views
+
+these are really just stored sql queries of other tables, but you can query them like tables. they have no actual data in them stored, they are queries that are run every time you query against them
+
+three kinds are stored, temporary and global. what do you think those are? stored would probably be queries taht are saved somewehre in the schema where you can actually see them represented, temporary are maybe ones that you do inline in another query, and global would be I suppose ones that are avaiablel from anywhere, any database or location in the hive metastore???
+
+let's see what the answer really was:
+ok, so the real answer is that the stored views are persistently stored in the underlying filesystem, and the temp views are ones that are only around for that spark session
+
+four places where you can see new spark sessions created:
+
+- open a notebook
+- detach and reattach to a cluster
+- installing a new python package (interesting). this is because the python interpreter is restarted
+- restarting a spark cluster
+
+I guess my question is why do these kickoff new spark sessions, but I can hold it. ok actually I think I can answer it because all 4 involve having a new python interpreter kernel start, so less to do with the cluster status and more to do with the runtime environment changes caused by that compute becming available and unavailable.
+
+ok, another thing, it is not 'global view' it is 'global_temp' or global temporary view. these are available to any notebook running on the currently active databricks cluster. it is good to know that these are only available for the lifetime of the cluster and they have to be qualified when you use them with the global_temp keyword, much as you would qualify a schema in the sql statements.
+
+the scope is probalby the best way to remember
+stored view - database scope, must be manuyally dropped with ta 'drop view' command
+temp view - session scope for spark, dropped automatically when spark session terminates
+global temp view - cluster scope, dropped when the cluster is terminated or restarted. also these can be accessed for multiple spark sessions as long as the cluster is still running
