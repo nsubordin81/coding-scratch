@@ -700,3 +700,12 @@ getting them into the data lakehouse
 from files into delta_tables we can use
 create table my_awesome table
 as select \* from json.`path_to_file`
+
+so just like creating delta tables from other delta tables, you can't explicilty state teh schema in your query
+you have to let the ctas statement infer it. this means that if there isn't good inherent schema or self-description in the
+file format itself, then you will be hard pressed to load it into a table with the correct datatypes.
+
+csv and tsv not great candidates for that then.
+
+you also can't specify file options that yo migh twant to with something like a csv file.
+what you can do instead is have a create table statement with the using keyword to get back the missing file options
