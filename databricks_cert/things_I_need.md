@@ -709,3 +709,18 @@ csv and tsv not great candidates for that then.
 
 you also can't specify file options that yo migh twant to with something like a csv file.
 what you can do instead is have a create table statement with the using keyword to get back the missing file options
+
+important stuff, when you go this route, you have to use a location keyword, meaning that you aren't going to be storing this table in the delta lake, the hive metastore, what have you
+
+also, the table is not converted to a delta table, there is no data movement, you aren't creating a transaction log, this is just a reference to an external csv in another location
+
+create table external
+(id int, name string)
+using data_source
+options (header="true",
+delimiter=";")
+location=path
+
+ok, so this makes it seem like there is an inherent weakness with using delta tables in databricks when you have external formats without good schema definitionss.
+
+but it turns out that once you have created this external table with a defined schema, you can then create a temp view off of that schema and then use a ctas off of that temp view to read the table in as a delta lake table. seems like a lot of hops with known steps, I wonder why nobody has automated this yet.
