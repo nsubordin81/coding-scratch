@@ -677,3 +677,26 @@ the scope is probalby the best way to remember
 stored view - database scope, must be manuyally dropped with ta 'drop view' command
 temp view - session scope for spark, dropped automatically when spark session terminates
 global temp view - cluster scope, dropped when the cluster is terminated or restarted. also these can be accessed for multiple spark sessions as long as the cluster is still running
+
+### extract data from files with spark sql
+
+select \* from file_format.`path_to_file`
+
+backticks are important
+
+can do something like
+select _ from json.`path_to_file`
+seelct _ from parquet.`path_to_file`
+
+file formats supported and good for raw text extraction are (JSON, CSV, TSV, TXT)
+select \* from text.`path_to_file`
+self-describing formats like json work better than something like CSV
+
+can do bytes for unstructured data or things already stored in binary
+select \* from binaryFile.`path_to_file`
+
+getting them into the data lakehouse
+
+from files into delta_tables we can use
+create table my_awesome table
+as select \* from json.`path_to_file`
