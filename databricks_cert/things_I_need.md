@@ -728,3 +728,4 @@ but it turns out that once you have created this external table with a defined s
 ### notes from hands on practice with these:
 
 csv version of extracting the data didn't work because the delimiter was a semicolon
+note that for csv as datasource column order and datatypes of columns should not get shuyffled in the csv as you update it.
