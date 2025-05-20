@@ -760,3 +760,7 @@ for adding new records, that is `insert into` , but there is one problem with th
 spark sql has ways to directly work with json data stored as a string in a column. you can use the ':' colon delimiter to drill down into json properties of string json objects, even nested ones
 
 e.g. `profile:address:country` will get you the country field of the address nested object in the profile json string
+
+you can also use a spark sql datatype called a profile_struct, which will transform the text json into a type that is aware of the structure of, in this example, the json text. it will allow you to browse the data like it was a parsed json in the query outputs, and also you can query it with dot syntax instead of colon syntax.
+
+it is harder to get to though, you use a ctas or cras to get to it, but you have to provide a schema. in many cases you don't have one, but one row of data from that column in your original text table shoudl provide spark what it needs, you use the `schema_of_json` to capture this in the query. remember yoiu also use the `from_json` in there to get the json parsed in the first place.
