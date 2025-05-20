@@ -724,3 +724,7 @@ location=path
 ok, so this makes it seem like there is an inherent weakness with using delta tables in databricks when you have external formats without good schema definitionss.
 
 but it turns out that once you have created this external table with a defined schema, you can then create a temp view off of that schema and then use a ctas off of that temp view to read the table in as a delta lake table. seems like a lot of hops with known steps, I wonder why nobody has automated this yet.
+
+### notes from hands on practice with these:
+
+csv version of extracting the data didn't work because the delimiter was a semicolon
