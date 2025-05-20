@@ -752,3 +752,11 @@ differences:
 shows up as a write with mode overwrite
 can't create a new table only overwrite an existing one
 is safer because it will only add new records that match the schema of the existing table wheras CRAS might accidentally add or remove columns when it creates teh new table or replaces it
+
+for adding new records, that is `insert into` , but there is one problem with that, it will keep inserting into the table and not worry about duplicates.
+
+### advanced transformations
+
+spark sql has ways to directly work with json data stored as a string in a column. you can use the ':' colon delimiter to drill down into json properties of string json objects, even nested ones
+
+e.g. `profile:address:country` will get you the country field of the address nested object in the profile json string
