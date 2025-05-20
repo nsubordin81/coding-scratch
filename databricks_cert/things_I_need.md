@@ -733,4 +733,22 @@ note that for csv as datasource column order and datatypes of columns should not
 demonstration though when we used the option of ctas with using csv command that we created an external table that was not a delta table.
 the way to prove that this had happened and we didn't get the benefits. that it happened: describe extended books shows that it is in the external location
 we didn't get the benefits: we copied the rows back into a csv that was twice as long saving them into the table using a spark api, and this should have doubled the tablesize but
-instead spark still read from the cache, because there were no delta tables configuration to tell it to update.
+instead spark still read from the cache, because there were no delta tables configuration to tell it to update. refresh table command invalidates teh cache and rescans the dataset and bring everything back into memory which can take a really long time. that is th elocal storage cache
+
+### updating and overriding files
+
+with delta tables it is often better to overwrite, because
+
+1. you retain the older data and cdan get it back with time travel
+2. it is faster because a delete and recreate would invovle recursive directory listing and other operations that you don't need if you don't delete the full table
+3. it is an atomic operation, so you can concurrently read from or write to a table's existing contents even while it is being replaced
+4. since this is ACID, the whole operation will revert if failed
+
+the way to take advantage of this for updates is to use a CRAS statement `create or replace table as`
+
+`insert overwrite` is another operation which has the same net effect as CRAS
+
+differences:
+shows up as a write with mode overwrite
+can't create a new table only overwrite an existing one
+is safer because it will only add new records that match the schema of the existing table wheras CRAS might accidentally add or remove columns when it creates teh new table or replaces it
