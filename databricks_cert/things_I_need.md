@@ -729,3 +729,8 @@ but it turns out that once you have created this external table with a defined s
 
 csv version of extracting the data didn't work because the delimiter was a semicolon
 note that for csv as datasource column order and datatypes of columns should not get shuyffled in the csv as you update it.
+
+demonstration though when we used the option of ctas with using csv command that we created an external table that was not a delta table.
+the way to prove that this had happened and we didn't get the benefits. that it happened: describe extended books shows that it is in the external location
+we didn't get the benefits: we copied the rows back into a csv that was twice as long saving them into the table using a spark api, and this should have doubled the tablesize but
+instead spark still read from the cache, because there were no delta tables configuration to tell it to update.
