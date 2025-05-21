@@ -785,3 +785,5 @@ union, intersect and minus (difference)
 union puts all rows whether they are in one or the other
 intersect only records that are in both
 minus only records that are in a but not b
+
+pivot clause changes data perspective. so I'm not as familiar but it seems like you take some column and do an aggregate function on the data so that the data result gets flattened out for the targt column across some valeus for that column. in the example it was to take the orders_enriched table and then pivot it out to show the sum of the quantity of books ordered for each customer for 12 of the books in the book column. just selecting from orders would not do this, becasue it has an array in the books column.
