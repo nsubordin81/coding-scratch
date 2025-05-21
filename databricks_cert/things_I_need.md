@@ -841,3 +841,10 @@ options for processingTime,
 - with .trigger availableNow=True, you can microbatch several batches for immediate processing
 
 outputMode has two options, "append" and "complete" . these have to do with what happens to the result table. in the first case, the result table is appended to, in the second case, the result table is overwritten each time.
+
+checkpoints track stream progress, they should not be shared between streams, they are particular to the progress of one stream.
+there are also write ahead logs. this creates fault tolerance. the write ahead is done as offsets of records to process vs already processed per time interval. this is like kafka's producers
+
+stream transformations are designed for exactly once delivery, they infrasttructure and the operatios are idempotent so even if you process somethign more than once it will only have the impact as if you processed it once.
+
+you need a repeatable source storage to make this all work though, so in other words s3 or kafka or something like that, where you could go and get the records and play them back all over again.
