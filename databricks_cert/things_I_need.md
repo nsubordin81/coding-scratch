@@ -808,3 +808,36 @@ function body
 UDFs are permanent functions taht are persisted to the database and so you can use them across different spark sessions and notebooks
 
 you can drop a udf with `drop function`
+
+## spark data streaming
+
+data stream is any source that grows over time
+
+- files in cloud storage
+- database updates in a change data capture feed (CDC)
+- events in a pub/sub message feed
+
+two approaches essentailly with some intermeidate variants
+
+- process every record every time you need to, so like a batch
+- process only what is added as it comes in
+
+you can use structured streaming in spark for handling the data as it comes in
+abstractly, spark structured streaming is able to handle an infinite incoming data stream.
+it treats the stream incremental elements like they are rows in an unbounded table.
+
+you can write these outputs of transformations on this table to a delta table or many other types of storage.
+
+for delta tables, you can use spark readStream to set up the delta table source as an outgoing stream, and you get a streamDF dataframe to operate on
+it will handle the data that is coming in as well as hwat is already there.
+
+you use writeStream function off of the spark streamDF to poll incrementally for added records and process them, and then to append to the table, and the whole thing is enabled by checkpoints that are set up to monitor the changes to the tables.
+
+options for processingTime,
+
+- with no .trigger, default will be processed every 500 milliseconds
+- with .trigger you can put a processingTime to a set interval time
+- with .trigger once=True, you can batch process all records currently in table
+- with .trigger availableNow=True, you can microbatch several batches for immediate processing
+
+outputMode has two options, "append" and "complete" . these have to do with what happens to the result table. in the first case, the result table is appended to, in the second case, the result table is overwritten each time.
