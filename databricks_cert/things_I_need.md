@@ -766,3 +766,5 @@ you can also use a spark sql datatype called a profile_struct, which will transf
 it is harder to get to though, you use a ctas or cras to get to it, but you have to provide a schema. in many cases you don't have one, but one row of data from that column in your original text table shoudl provide spark what it needs, you use the `schema_of_json` to capture this in the query. remember yoiu also use the `from_json` in there to get the json parsed in the first place.
 
 the parsed_struct also has a .\* feature which can flatten all of the fields in the top layer of the struct also useful.
+
+explode() spark sql function will explode an array column and make a row for each entry of the array, duplicating the other columns of the table
