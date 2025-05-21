@@ -773,3 +773,15 @@ collect_set() spark function will collect elements of the array and only have it
 if the array is nested, like 2d, then we ahve to think a bit more about it. the solution there is to use `flatten` and then wrap that in `array_distinct` to keep only the distinct values
 
 so what is the difference between collect_set and array_distinct? well collect_set() as an aggregate fuunction works on more than just arrays and additionally it can recognize duplicate collections like arrays where the values and order are the same and only keep one of those. array_distinct is just to remove duplicate values from a 1d array of values.
+
+#### joins supported by spark
+
+inner, outer, left, right, anti, cross, semi
+
+#### set operations supported by spark
+
+union, intersect and minus (difference)
+
+union puts all rows whether they are in one or the other
+intersect only records that are in both
+minus only records that are in a but not b
