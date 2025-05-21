@@ -768,3 +768,8 @@ it is harder to get to though, you use a ctas or cras to get to it, but you have
 the parsed_struct also has a .\* feature which can flatten all of the fields in the top layer of the struct also useful.
 
 explode() spark sql function will explode an array column and make a row for each entry of the array, duplicating the other columns of the table
+
+collect_set() spark function will collect elements of the array and only have it keep one copy of each element, remove duplicates. this consolidates an array into a set.
+if the array is nested, like 2d, then we ahve to think a bit more about it. the solution there is to use `flatten` and then wrap that in `array_distinct` to keep only the distinct values
+
+so what is the difference between collect_set and array_distinct? well collect_set() as an aggregate fuunction works on more than just arrays and additionally it can recognize duplicate collections like arrays where the values and order are the same and only keep one of those. array_distinct is just to remove duplicate values from a 1d array of values.
