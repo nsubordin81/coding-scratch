@@ -787,3 +787,24 @@ intersect only records that are in both
 minus only records that are in a but not b
 
 pivot clause changes data perspective. so I'm not as familiar but it seems like you take some column and do an aggregate function on the data so that the data result gets flattened out for the targt column across some valeus for that column. in the example it was to take the orders_enriched table and then pivot it out to show the sum of the quantity of books ordered for each customer for 12 of the books in the book column. just selecting from orders would not do this, becasue it has an array in the books column.
+
+### Higher order function and UDFs user defined functions
+
+why do you need higher order functiosn?
+to work with complex datatypes in columns, like and array of structtypes, i.e. hierarchial data
+
+after the filter you might want to run a subquery (wrapper) to use a where clause on the result
+
+udf allows you to make a custom combination of sql queries avaialble as a function in the database making them reasonable in sql queries
+they maintain the benefits of spark
+
+what you need for UDF
+
+`create or replace function` then name of function, parameters with types
+type for the data to be returned
+
+function body
+
+UDFs are permanent functions taht are persisted to the database and so you can use them across different spark sessions and notebooks
+
+you can drop a udf with `drop function`
