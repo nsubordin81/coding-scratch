@@ -865,3 +865,25 @@ streaming queries are always on queries that can have interactive dashboards ass
 careful to always terminate your streaming queries because if they stay on the clusters can't autoterminate
 
 important takeaway for me, you have the writestream queries on, and they need to stay on to pick up changes that occur. but you shouldn't leave them on when testing. you can also do the batch mode with the trigger once=True or availableNow=True, and it will do all available and then terminate itself.
+
+## incremental data ingestion from files in databricks
+
+files that have been encountered since the last ingestion. this is to me like microbatching and things like that. it just means what we were trying to do on the FINCH project where we only processed new records and not reprocessed all the old records.
+
+spark has two ways to efficiently procewss and store things as they come in
+
+- copy into spark sql command
+- autoloader
+
+copy into
+
+- idempotent
+- incremental
+
+syntax
+
+`copy into` <table>
+`from` <file path>
+`format` e.g. csv
+`format_options` things like delimiter=":"
+`copy_option` things like mergeSchema=True
