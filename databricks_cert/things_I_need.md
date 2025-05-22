@@ -887,3 +887,27 @@ syntax
 `format` e.g. csv
 `format_options` things like delimiter=":"
 `copy_option` things like mergeSchema=True
+
+autoloader
+
+this option is for processing files as they arrive into a storage location efficiently.
+can work at the scale of billions
+near realtime performance in the millions of files processed per hour
+uses checkpointing the same way kafka uses offsets and such, it can ensure exactly once delivery and can resume from where it left off
+
+syntax of autoloader
+
+`spark.readStream
+        .format("cloudFiles")
+        .option("cloudFiles.format", <source format>)
+        .load(<path-to-files>)
+      .writeStream
+        .option("checkpoint_location", <checkpoint_directory>)
+        .table(<table_name>)
+`
+
+one other thing you an specify during read to avoid the inference cost for when autoloader auto-detects the schema of the incoming files
+is to provide a cloudFiles.schemaLocation option. this will make it so that the schema is known and doesn't need to be inferred every time a new file is read in.
+you can put this in the same place as your checkpoint to store the metadata needed for incremental processing.
+
+overall the difference between these two approaches boils down to convenience vs. scalability. autoloader can process in batches so can work at scale, and copy into is probably easier to set up because you can do it as a simple query and I guess don't necessarily need to set up a dedicated location in cloud storage to ingest from, but rather specify a file location to ingest from.
