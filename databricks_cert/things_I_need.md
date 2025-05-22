@@ -850,3 +850,14 @@ stream transformations are designed for exactly once delivery, they infrasttruct
 you need a repeatable source storage to make this all work though, so in other words s3 or kafka or something like that, where you could go and get the records and play them back all over again.
 
 j8ust as an fyi, you can't sort or deduplicate with streaming data. this is apparently really hard. there are advanced methods like windowing and watermarking
+
+### form the hands on exercise
+
+- you create a streaming view using the spark.readStream method you can use a delta table as a stream source and then create a temporary view off of it
+- in the exercise we then select from this view but in practice you wouldn't becuase it leads to an active polling in the display. you might for dashboards, but for static demos you probably don't want to.
+
+you can't do order by becausae that is sorting and not supported for streams.
+
+something to understand about how spark manages streaming. you need to support incremental logic form the beginning with the read stream in order for spark to know taht it shoudl be using a streaming dataframe for the writing process toi write into the correct kind of dataframe.
+
+streaming queries are always on queries that can have interactive dashboards associated with them. the streaming queries are queries against a streaming data source, like a temp view that is streaming or a streaming table or dataframe. once something is written to durable storage it is no longer a streaming query to query it it will return an absolute snapshot value of the table at that point in time.
