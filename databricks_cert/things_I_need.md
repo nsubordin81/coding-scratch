@@ -861,3 +861,7 @@ you can't do order by becausae that is sorting and not supported for streams.
 something to understand about how spark manages streaming. you need to support incremental logic form the beginning with the read stream in order for spark to know taht it shoudl be using a streaming dataframe for the writing process toi write into the correct kind of dataframe.
 
 streaming queries are always on queries that can have interactive dashboards associated with them. the streaming queries are queries against a streaming data source, like a temp view that is streaming or a streaming table or dataframe. once something is written to durable storage it is no longer a streaming query to query it it will return an absolute snapshot value of the table at that point in time.
+
+careful to always terminate your streaming queries because if they stay on the clusters can't autoterminate
+
+important takeaway for me, you have the writestream queries on, and they need to stay on to pick up changes that occur. but you shouldn't leave them on when testing. you can also do the batch mode with the trigger once=True or availableNow=True, and it will do all available and then terminate itself.
