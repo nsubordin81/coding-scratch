@@ -848,3 +848,5 @@ there are also write ahead logs. this creates fault tolerance. the write ahead i
 stream transformations are designed for exactly once delivery, they infrasttructure and the operatios are idempotent so even if you process somethign more than once it will only have the impact as if you processed it once.
 
 you need a repeatable source storage to make this all work though, so in other words s3 or kafka or something like that, where you could go and get the records and play them back all over again.
+
+j8ust as an fyi, you can't sort or deduplicate with streaming data. this is apparently really hard. there are advanced methods like windowing and watermarking
