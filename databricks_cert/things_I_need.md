@@ -911,3 +911,26 @@ is to provide a cloudFiles.schemaLocation option. this will make it so that the 
 you can put this in the same place as your checkpoint to store the metadata needed for incremental processing.
 
 overall the difference between these two approaches boils down to convenience vs. scalability. autoloader can process in batches so can work at scale, and copy into is probably easier to set up because you can do it as a simple query and I guess don't necessarily need to set up a dedicated location in cloud storage to ingest from, but rather specify a file location to ingest from.
+
+the readStream and writeStream calls are part of the structured streaming api
+
+## Multi Hop Architecture
+
+Medallion architecture is another name for it
+this is a design pattern to logically organizing data in a multi layered approach
+
+the idea is for incremental improvement of the structure and quality of the data as it flows from layer to layer of the architecture
+
+bronze is the raw data coming in
+json files, operational databases (transactional oltp), or kafka streams
+
+silver layer of the architecture involves filtering cleaning, augmenting of data
+can be joined fields
+
+gold layer has aggregated data used for reporting, dashboarding and machine learning
+
+benefits
+
+- simple
+- can recreate tables from raw data at any time, so repeatable I guess
+- supports batch and streaming and hybrid appraoches.
