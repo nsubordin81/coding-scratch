@@ -934,3 +934,5 @@ benefits
 - simple
 - can recreate tables from raw data at any time, so repeatable I guess
 - supports batch and streaming and hybrid appraoches.
+
+somethign I didn't grasp before, the schemaLocation doesn't preexist, it is where the first inferred schema will be cached, that is why you can put it with the checkpoint location
