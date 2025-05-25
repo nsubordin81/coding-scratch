@@ -936,3 +936,27 @@ benefits
 - supports batch and streaming and hybrid appraoches.
 
 somethign I didn't grasp before, the schemaLocation doesn't preexist, it is where the first inferred schema will be cached, that is why you can put it with the checkpoint location
+
+int he medallion example, first thing he does is set up a temp view based on a cloudFile stream with autoloader off of the source file location. he then wraps the raw stream view with another one he creates in order to add some metadata such as the current timestamp for when it arrived adn the source file name using a function I guess from spark sql called input_file_name()
+
+## delta live tables
+
+framework, reliable ETL data pipelines. good for quality of data
+loking at it visually they are simple to read. pipieline nodes are tables bronze, silver and gold layers read left to right
+
+multi-hop architecture is the medallion thing, just another word
+
+delta live tables are always preceded by 'live' keyword
+
+for streaming delta live tables you need to use the stream method in spark and the stream keyword when defining them with spark sql
+
+you need to use the live prefix for any dlts in your queries, such as when setting up a silver layer
+
+there are constraints you can add to your query in DLT, adn three different handlers. for all three, you start with `on violation`, then `drop row` will remove rows that violate the constraint, `fail update` will make the whole pipeline faile for a violation, and `omitted` will keep the records processed in there but log the violation
+
+config is straightforward,
+triggered or continuous
+it makes a new cluster
+you set up where the data files come from
+
+cluster mode fixed size single node
