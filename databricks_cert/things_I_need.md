@@ -960,3 +960,29 @@ it makes a new cluster
 you set up where the data files come from
 
 cluster mode fixed size single node
+
+when you create the pipeline with the declarative notebook and launch it, you can choose development mode or production mode. in production mode, the cluster will be regenerated for every change, while development mode allows for in place updates. somethign also about retries, either they are disabled or enabled in development mode, I think disabled, so that errors can be quickkly triaged without haveing to worry about the system trying to self-heal
+
+you run pipieline the first time and it taks a bit to spin up the cluster, but then you see the green flowing through the nodes in the scene graph type doohickey and you know you are aoff to the races.
+pipeline events, info, warn, error are all in a log at the bottome of the screen adn then on the right you have informationa bout the pipeline and then scroll down for information about the cluster compute resources. Scene graph doohickey is a DAG
+
+clickjing a node in the pipeline shows data about it like run status, schema, comments. in silver it has a data quality readout with a visualiztion. this is because of the constraints we added
+
+if you forget to add the live namespace, it won't fail int he declarative part in the notebook, but when you run the pipeline it will fail because it won't be able to find the table
+
+during configuration you specify a location in dbfs that will hold all of the events that dlt logs when the pipeline runs. you can explore that directory space and find out what is happenidn in dlt when the pipeline runs.
+
+using the dbutils or fs magic string you can look at the directory and see
+autoloader/
+system/
+checkpoints/
+tables/
+
+system/ has all the events and if you query it you will notice that the events are stored in a delta table by DLT
+tables/ has the delta live tables files storage
+
+if you want to interact with the database that fronts those tables, you can get it
+
+from the piptline view, wehn you click a table node in the opiopeline it will give you the query against the table's hive metastore information and you can run that.
+
+you can stop all the streaming jobs by terminating the pipeline cluster from the job pipelines tab
