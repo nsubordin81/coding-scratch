@@ -986,3 +986,230 @@ if you want to interact with the database that fronts those tables, you can get 
 from the piptline view, wehn you click a table node in the opiopeline it will give you the query against the table's hive metastore information and you can run that.
 
 you can stop all the streaming jobs by terminating the pipeline cluster from the job pipelines tab
+
+## change data capture
+
+what is it? identifying changes to a data source and delivering them to a target
+
+structure and syntax
+
+`apply changes into` live.target_table
+from stream (live.source_table_cdc_feed)
+keys (key_fields)
+apply as delete when operation_field="delete"
+sequence_by sequence field
+columns \*
+
+sequencing key provided by user, cdc able to make sure deleted rows don't show up downstream and updates are made in the rightr order
+
+if you don't specify anything, it assumes upsert functionality is desired and both inserts and updates will be flowing in
+
+the apply as delete when field is optional
+you can use `except` to filter columns you don' twant to be put in the target table
+
+you can choose with apply changes into to have one of two slowly changing dimension or SCD type tables. the default is SCD type 1 which holds two constraints:
+
+- the table will only ever have one record per unique key
+- updates to records will overwrite original information.
+
+there is one big disadvantage of using apply changes into for a change data capture with delta live tables: the rule for delta tables that they have to be append only is broken because of the overwriting in place, and that means you can't stream from these tables as a source in the next layer of your multi hop architecture. you can still load there data into a table, but it has to be as a one time operation, like with a ctas statement
+
+you can create live views in delta live tables. their data isn't stored to the hive metastore, but you can report on it and treat it as you would any other table for querying purposes.
+
+the 'live' namespace in delta live tables allows you to reference tables or views created in one notebook from another notebook because they are both in the live. namespace, which is at the delta live level fo abstraction or scoping rather than the individual notebook.
+
+to add a notebook, from your DLT pipoeline's page, you go to settings, and then press 'add notebook library' and then browse to and pick your other notebook. that is how you can end up with several referenced notebooks in the pipeline.
+
+if you run into problems getting a DLT pipeline to run after making significant changes, you can instead of pressing start, choose the option for a 'full pipoeline refresh' which will clear all data and attempt to load it all again from streaming sources.
+
+## pipeline jobs
+
+building dag pipeline jobs is very gui ijntensive but it is not dinfferent in principle from what you did with prefect. you go through the process of crea ting a new job, you point the job to a notebook, you specify the location of it (like workspace or github) and then the path to the notebook you want to run, you pick a cluster, using a job cluster is better for optimizing cost.
+
+you can have a job carry out a task within ght scope of the notebook, you can have it depend on other tasks as well so they flow sequentially. you can pass it a different value than notebook if instead of running notebook commands you want to do something like run an entire ETL pipeline, a delta live tables pipeline, etc.
+
+the jobs details on the
+
+for these jobs now, you can set a schedule for when they will happen. you can use a nice interface that is closer toi like a calendar appointment tool, or you can use a CRON syntax to do it
+
+you can email on start, success or failure
+
+you can control w2ho can change or run the job. you can change ownershiop of one user. this type of stuff is pretty standard if you are used to that.
+
+once the jobs are runnign and have run in the past, you can acces them through the runs tab. it has active and completed data for jobs. you can clidk into an active job for reatime visualizations of execution.
+
+if yuou run a delta live tables pipeline wihtin a job, the results won't show in the job results window, but you get a link to go back to the detla live tables section of databricks where you can view them.
+
+so all in all what you did was:
+
+- crfeate a delta live tables declarative pipoeline to stream data from sources that were autoloaded in from json or parquet files in dbfs somewhere.
+- create a job where you - first positioned the source data for ingest - then ran the entire DLT pipeline - then ran a notebook that performed additoinal queries againts the gold table that was released.
+  I shoudl probably try do do this kind of thing on my own with them, seems like a good itea.
+
+  one powerful feature of jobs is that you can choose to repair a run with only the tasks that failed during your last run. you can select exactly which task to start with within a run.
+
+  seems like for a pipieline you have to remember to terminate the cluster.
+
+  ## databricks sql
+
+for one, the workspace that we typcially used in databricks is the data science and engineering workspace. you can change to SQL by using the 'sql persona' avaiable from a drop down somewhere in the top left of databricks interface
+
+databgricks SQL or dbsql, is a data warehouse that scales well and let's you run all tables with a unified governance model
+
+SQL warehouse - this is the compute power provided to databricks sql. it's a sql engine based on a spark cluster.
+
+setup is pretty standard, their verison is old but the premise is still the same, I would create a dedicated cluster or a serverless cluster and ther is pro and classic. for mine the standard 4 vCPUs available on the free trial were not sufficent for the smallest compute size by a factor of 4 so I don't get to play along I have to watch.
+
+once you have a warehouse ready to use, you can go get to some data. dashboards, visit gallery, NY taxi eda is there. you could also create yoiur own new dashboard from scratch, that is kind of the point eventually.
+
+## dashboards
+
+you can refresh anytime. you can view the query for any visualization with three dots in cornner
+
+navigating in the dashboard, you can edit the visualizaitons tehre are a lot of tweaks you know
+
+you can add visualizations with the ` +` symbol.
+
+you can name the visualizations
+
+once you make a new visualization it is not inherently from the notebook in your dashboard. you habve to add it
+
+you can edit the visualization after it is added to resize it and such
+
+dashboards can be shared with other users . you have the option to run them as if they were the owner or viewer.
+if you don't own the data that is the basis for the dashboard loaded as the users and have it in your workspace, then the other option seems better, run as owner.
+
+there is a sql editor for the sql warehouse you connect to and then the sql editor interface supports querying against the tables in this warehouse
+
+f8un trick in sql editor, if you want to ad the tablename to a query, you can click on the >> button by that table name int he schema browser panel on right. this works for columns too.
+
+you can save a query and give it a name and then select three dots on query tab to add the query to the sample dashboard. there is a three dots down at the bottom by table
+
+you can schedule the refresh of the dashboard for every time period interval.
+
+there is also a queries sidebar option that shows you your queries.
+
+you can use queries to set up alerts also. there is an alerts side menu option also. you can give the alert a name. you can set an alert trigger like "total_fare > 10000 " . you can set up the notification to receive when the trigger happens.
+
+## data object privileges and data governance model
+
+the governance model let's users manage access controls with grant, deny and revoke operatyions. this is programmatic and it applies to the data objects.
+
+syntax for grants: `grant <privilege> on <object> <object name> to <user or group>`
+
+example: `grant select on table my_table to user@123`
+
+what types of data objects are there?
+
+catalog
+schema (database)
+table
+view
+function
+any file
+
+then there are the types of permissions you can grant:
+
+select
+modify
+create
+read_metadata
+usage
+all privileges
+
+who can grant?
+
+database admin - all catalog and filesystem grant privileges
+catalog owner - can grant on anythign inthe catalog
+database owner - can grant on anything in the database
+table owner - can grant on anythign in that table
+view owner - ""
+function owner " . "
+
+these didn't go over it but you can also deny or revoke privileges to users with these roles at the right scope and you can also show grants to see what people have for that object
+
+very important once you ahve somthing like a table that you want ot configure permissions on, that in addition to select or modify or whatever you also grant usage permissions or users won't be able to do anything.
+
+## data explorer to manage permissions
+
+data explorer let's users navigate different objects, and they enable users to set permiossions
+
+when on a db in the data explorer, use the permissions tab to suss out what is wrong.
+
+UI is conveneint, you ahve things like a checkbox and revoke button, and you can edit owner with a button as well. turns out in the UI you can set the owner to an individual or a group
+all the options are the dame as teh adata governance framework in the code, just has a gui in front of it.
+
+only thing different is the you can't use the 'any file' option, you ahve to use sql
+
+you can look at the sql history in the left hand panel to look at teh query history run behind the scenes for the data explorer.
+
+## Unity Catalog
+
+what is it?
+
+governance solution for data.
+one place, in the center, one stop shop
+you can store your data here even if you are using it in azure, aws and gcp, just one time for databricks.
+
+hyou can do governance3 with sql, you can do it for all different kinds of data objects: files, machine learning models, tables, dashboards
+
+this is about data access rules, write once run anywhere solution for that. pretty slick. I can control the access to my data centrally and I mean really centrally
+
+two aspects of it, user/group management was at the workspace level, and then access was managed at the hive metastore level
+
+in unity catalog, this stils outside the workspace and is accessed with a UI called the account console
+
+both the user management and the unity catalog metastore are outside of the workspace and accessed with this account console where they get assigned to workspaces. one metastore can be assigned to multiple workspaces, so dbfs storage and ACLs are shared. ACLs are4 access control lists.
+
+3 level namespace?
+
+so the databricks namespacing is familiar now, the schema is the database it belongs to and you have a decent mental model of what that looks like. all that the unity catalog does is add another namespace one level up. but the structure goes one level up from that it goes:
+
+Unity Catalog metastore - top level area, stores metadata about the objects being controlled by the metastore as well as acess control lists for access to those object
+
+the unity catalog metastore contains the catalog, and that is the highest level namespace for referring to tables.
+
+the default for databricks is still hive metastore, but the unity catalog metastore as improvementsfrom e security standpoint and is preferred for environments where this is important
+
+you can't have too many catalogs
+
+security model
+
+unity catalog supports storage credentials
+
+there is stuff for delta sharing but it is out of scope
+
+theere are only three thypes of identities to manage in unity catalog: users, service principals, and groups. that is pretty easy. service principals are systems, the other two are either one or plural
+
+groups are more cdomplicated than I thought they can mix people and service principals and be nested.
+
+unity catalog manages identities with identity federation, which means that it can create an identity at the unity catalog levela nd then that propagates to teh workspaces, rather than managing and creating redundant copies of an identity per workspace
+
+UC privileges:
+
+create
+usage
+modify
+select
+
+read files
+write files -- the read and write files together are the replacement for hive metastore's any file option
+
+execute - this is for controlling access to running udf
+
+grant model similar to the data governance one for hive metastore, but you have more privilege types, you have these securable objects that are defined, and you have defined principals
+
+UC is addative, so you can keep using legacy hive metastore.
+
+you can bypass unity catalog with hive_metastore, which will always go with the underlying metastore that is attached to their db
+
+UC benefits
+-centralized data governance that is the big one
+
+- built in data exploration
+- automatic data lineage
+
+- you don't have to migrate to it because it is addative
+
+https://accounts.cloud.databricks.com
+this is haw to log yourself out and go be an account admin to do things at the root level
