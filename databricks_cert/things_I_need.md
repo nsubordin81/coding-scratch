@@ -952,7 +952,7 @@ for streaming delta live tables you need to use the stream method in spark and t
 
 you need to use the live prefix for any dlts in your queries, such as when setting up a silver layer
 
-there are constraints you can add to your query in DLT, adn three different handlers. for all three, you start with `on violation`, then `drop row` will remove rows that violate the constraint, `fail update` will make the whole pipeline faile for a violation, and `omitted` will keep the records processed in there but log the violation
+there are constraints you can add to your query in DLT, adn three different handlers. for all three, you start with `on violation`, then `drop row` will remove rows that violate the constraint, `fail update` will make the whole pipeline faile for a violation, and if you omit the on violatiohn clause then the behavior will be to will keep the records processed in there but log the violation
 
 config is straightforward,
 triggered or continuous
