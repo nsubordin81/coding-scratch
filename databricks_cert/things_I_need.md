@@ -1227,3 +1227,19 @@ Gaps I'm hitting second time around:
   - that zorder indexing is part of the optimize command, it is a subcommand.
     - I learned the new thing that optimize is idempotent but zorder indexing is not. I also learned that zorder indexign is meant ot be incremental
     - I need to think a bit to remember what zorder indexing is all about. if optimize is to use fewer files to represent the data to save on performance, zorder indexin is more about partitioning the data so that things that should be logically grouped in the files and will be retrieved together are grouped that way for faster reads. realliy understanding how this provideds a benefit: it is like a; hashtable, it reorders the specified colums so that there are bins in the files and it knows where to look, it is like indexing so that it can always find the things in the box, rather than searching from bin to bin. very much like alphabetically ordering nametags when you come into an event so that you just look for the letter that corresponds to your name.
+- I did remember vacuum and my mental model of delta tables was strong enough to remember the implications of vacuuming a delta table and then trying to time travel back to a version that was vacuumed
+  remember you can set a retention period in the vacuum command `vacuum <table name> <reterntion period>`
+- going over the comments syntax I got that eretained
+- partitioning using one or more columns for performance reasons with `partitioned by` is somethign I knew. most use cases not benefitting from it and even being harmed by it is somethign I missed first time around, it is becaseu of the small file issue with the way databricks stores something.
+- create tabel vs ctas - don't need a schema in fact can't have one because it is automatically inferred. table is empty and you need an insert statement
+- ctas vs create table again, you use ctas you get data because you are creating it out of a select statement.
+- forgot there were both not null and check constraints. no data violating constraint already in table
+- constraint for check uses `check` keywoard. I'm guessing not null uses `not null` and has now conditional clause
+- syntax for cloning `create table <table> deep clone <source_table>` shallow is same but shallow
+- one difference delta vs csv and other is that delta makes sure you are always querying agasint the latest source data for your tables.
+- refreshing data in a table invalidates the cache which can meant reading all files again which takes a long time, one reason you don't want ot have to manually tell databricks to refresh a table that is external and not delta
+- ctas can import from externally defined resources with defined schemas
+- csv doesn't have defined schema, so what to do? if you try to use CTAS, the parsing will be bad
+- the solution with things like csv is that you can use create temp view with an explicit schema and with using csv, which creates the schema you want but you still have a non delta external table, but then you can use the ctas statement with a select from the temp view to infer the schema from the temp view and set up a managed table.
+- overwriting tablers is bette than dropping and recreating for ao bunch of reasons. it is acid so concurrent read and overwrite is possible without data loss, you save time on recursive directory listing, you also don't lose the table, you get to go back tot he old one if you want through time travel
+-
