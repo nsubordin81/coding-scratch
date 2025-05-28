@@ -1213,3 +1213,17 @@ UC benefits
 
 https://accounts.cloud.databricks.com
 this is haw to log yourself out and go be an account admin to do things at the root level
+
+Gaps I'm hitting second time around:
+
+- syntax for some things, like how to use the %fs command. ls '', and then there is head '' for viewing files
+- describe detail vs. describe history vs. expanded detail they are all good and I rememberd them but maybe not same names
+- remembering what delta tables can do and how they do it.
+  - I remembered that delta tables were storing metadata in the hive metastore, needed to remember dbfs:/user/hive/warehouse is the default location
+  - that 'managed' table is the same as delta table and 'external' is the name for not managed.
+  - that 'using delta' is the default and
+  - that if you do 'using' for something other than delta, you are creating an external table and the consequences of this are that you sacrifice all of that restore and optimize capability that delta tables have. examples of this could be using jdbc or using csv, this leaves the data in external tables and doesn't copy them into parquet files.
+  - that for time travel queries the syntax is `select * from table version as of <version>` or `timestamp as of <timestamp>` or `@v<version>`
+  - that zorder indexing is part of the optimize command, it is a subcommand.
+    - I learned the new thing that optimize is idempotent but zorder indexing is not. I also learned that zorder indexign is meant ot be incremental
+    - I need to think a bit to remember what zorder indexing is all about. if optimize is to use fewer files to represent the data to save on performance, zorder indexin is more about partitioning the data so that things that should be logically grouped in the files and will be retrieved together are grouped that way for faster reads. realliy understanding how this provideds a benefit: it is like a; hashtable, it reorders the specified colums so that there are bins in the files and it knows where to look, it is like indexing so that it can always find the things in the box, rather than searching from bin to bin. very much like alphabetically ordering nametags when you come into an event so that you just look for the letter that corresponds to your name.
