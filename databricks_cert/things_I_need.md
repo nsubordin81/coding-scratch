@@ -1257,4 +1257,10 @@ Gaps I'm hitting second time around:
     - transform function
     - udfs, adn you can drop them and they have case when statements
 - spark structured streaming
-  -
+  - one I got wrong for this before, once=True isn't as good as availableNow=True because once=True does a single batch
+  - separate chekcpointLocation is required for every streaming write to ensure processwing integrity
+  - structured streaming is exactly once and therefore idempotent. this only works if the source is reapeatable
+  - remember you can't sort or dedup w2ith streaming (probably because this involves comparing incoming streamed data with data that hasn't abeen streamed or has already been streamed. ) windowing and watermarking can help with this
+  - trigger\*() method in use, medallion or multi hop archtiecture, seems like creating temporary view in spark sql aor spark api is how you do it and then nothing happens unless you try to look at or write data with a future query. so, autoloader for initial ingest, then spark readStream for each future hop because the prior ttep would have left us with a table that we can use as a source that is a delta table. then you have some sql command in spark to make a temp view that represents the tranformation form one layer to another, and then you use spark writeStream to write it to a persistent source. structured streaming cannot be done on a table if they receive overwrites from upstream.
+  - remember to rerun tables that are batch jobs after you add data, doesn't work like streaming.
+    [
