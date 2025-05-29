@@ -1241,5 +1241,20 @@ Gaps I'm hitting second time around:
 - ctas can import from externally defined resources with defined schemas
 - csv doesn't have defined schema, so what to do? if you try to use CTAS, the parsing will be bad
 - the solution with things like csv is that you can use create temp view with an explicit schema and with using csv, which creates the schema you want but you still have a non delta external table, but then you can use the ctas statement with a select from the temp view to infer the schema from the temp view and set up a managed table.
-- overwriting tablers is bette than dropping and recreating for ao bunch of reasons. it is acid so concurrent read and overwrite is possible without data loss, you save time on recursive directory listing, you also don't lose the table, you get to go back tot he old one if you want through time travel
--
+- overwriting tablers is bette than dropping and recreating for ao bunch of reasons. it is acid so concurrent read and overwrite is possible without data loss, you save time on recursive directory listing or file deletion while it drops the tables, it is append only, you also don't lose the table, you get to go back tot he old one if you want through time travel
+- I feel liek this si one I'm going to get tested on. `create or replace table as ` is one that will overwrite but also create, `insert override` will just overwrite. also the former will allow schema changes if the inferred schema from the select is different that original schema.
+- important, insert into vs merge, you upsert into the target table from view or table. can add new, update records
+- for merge into you don't always have to specify the when matched and when not matched, so you can just to inserts or just do updates or both.
+- for merge into you can use temporary views as well as views and tables pretty muc hanything
+- things to remember about advanced queries with spark
+  - spark can doi nested json queries easily with ':' delimiter so for a column in the query, colons to drill down into the json object
+  - spark can also create a struct out of json column. you can do this with from_json() but you also need a sample of the schema, which you can get just by getting one row of the column as an example so that spark can parse it.
+  - so the real thing is from_json(column_name, schema_of_json())
+  - when you parse json with advanced spark sql, you have : to drill into json during select, you ahve .\* to flatten json to columns, and you have explode(array) to make a row for every element in an array column. you also have collect_set() to remove duplicates from arrays, and we have the array_distinct which we can apply outside of flatten(collect_set()) which would keep only distinct values. so you collect_set first to get rid of dupes in the inner arrays, then you flatten to a single l ong array, then you use array_distinct to just get the values from that.
+  - learning about advancecd spark sql stuff
+    - complex types with higher order functions
+    - filter function
+    - transform function
+    - udfs, adn you can drop them and they have case when statements
+- spark structured streaming
+  -
