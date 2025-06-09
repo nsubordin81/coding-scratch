@@ -1,0 +1,149 @@
+ok, I want your help designing my game and coming up with some of the thigns I haven't figured out about it yet. it will be a 2d platformer, a non-linear sidescrolling adventure with rpg elements, maybe a metroidvania if I can swing it. 
+
+I want to give you everything I have in a condensed document format and ask you how I can add to the appeal of it in terms of story and character depth and gameplay with mechaniics and, while staying within my original kind of design pillars and the constraints I'm putting on it if you can help me branch out creatively, maybe prompt me for more thigns you think I should be considering. 
+
+okay so here goes the full set of notes if I can type them in. 
+
+core statement - 2 mutant rejects climeb out of the waste to have a place in the world by ousting the scientists that classified them as a failed experiment. 
+
+mechanics levels are 2.5 d. most of the time it is a 2d platformer style like donkey kong country, but in some areas allow the characters to move along the z axis back into the level to another 2d platform, this makes it like a puzzle because some of the depth gates can only be accessed by a particular character or two of them in combination. maybe sometimes one of the characters gets stuck on a 2d platform and you have to get the others to come bail them out. also maybe there are traps for the characters and the others have to come save them. There would be multiple levels and ones, but secret passageways in one level culd lead to aonother. 
+
+(little aside to you, the reader, I can compromise on this whole depth thing it seems like it could add too much complexity)
+
+abilities. each player moves at a different speed and jumps at a different hieight and additionally they each have special abilities that enabled them to get through areas the others can't or use the depth gates taht the others cant. characters have a leveling system ala zelda style they get more vitality and learn new abilities partcularl to their unique types. the players can combine and perform super abilities with 2 or more. 
+
+npcs - there are friendly mutants that help they are other experiment rejects, and there are the scientist that created everything and rule the city and their traps, their "better creations" and their other means of hunting the mutants. There are also possibly just creatures above the surface that ignore the mutants because they are classified as better but this may be too on the nose. 
+
+thematic plot - humankind has the agift of creation and destruction, but we don't understand the value of what we create. 
+
+one mutant is trip clop, he is like a big eyeball with the nerve trailing as like a tail. the only other parts of his body are like a shoulder esque frame with two arms coming down and large, dextrous hands. he moves typically in kind of a walk that is part gorilla part bird, where the backwards bending of the elbows resemble the way a bird's bend and the dextrous hands and higher degree of freedom allowe dby the shoulder joints make it possible for him to spread his arms all the way to the sides and climb up vines and do flips and other maneuvers. 
+
+some move ideas: 
+
+roll attack
+
+eye beam
+
+ground slam
+
+swim??
+
+wall punch (3d move?)
+
+hang and swing
+
+hang and swing transition (3d move?)
+
+then there is nerville
+
+nervil is a bundle of nerves that kind of represents a ship's wheel coming out in concentric circles that have nervy stalks  in straight lines ending in little bundles, all around a center eye which is much smaller than trip clop's and embedded in the fleshy body at the center. 
+
+nerville doesn't touch the ground but levitates in midair, showing that his psionic or ESP type abilities are strong as he is essential just a big ball of psychic brain mass. alternatively, he may do endless cartwheels, not sure which have to prototype a bit. 
+
+nerville can already 3d walk if we ddo the dept thing in certain areas without learning special skills. the idea here woudl be that early in the game you have the ability to traverse these other areas by accessing them with nerville, but trip clops presence in them later helps you unlock still more areas you couldn't before. 
+
+focuses for the game
+
+non-linear gameplay
+
+achievement baeed perogression
+
+rich enviornment
+
+emergencye through characer-level interatcion
+
+2.5d level design, ability to get to different parts of the world in more than one way
+
+emergence through ais that affect the world in different ways
+
+npcs that don't duplicate
+
+getting hit counts as combat experience, you have to get injured to get stronger
+
+i have a sketch here for a really creative looking kind of health system where you have a life bar an then you get progress for exploration and you get it for taking damage and giving damage, which all help total up to you progressing (don't know if I've seen this in other htings, normally you just avoid taking damage and get experience for killing stuff)
+
+soem ideas for what enemies could be like, this is tough, I'll get to more of the story stuff but that is where I"m struggling a bit. Originally I was thinkign that the enemies would be closely related to aesthetic ideals held by humans so it was relatable even though the world isn't necessarily a future earth. so it would be like the surface dwellers were a bunch of bodybuilders and supermodels or porn star look alikes, which I am kind of uncomfortable putting in the game, hurts the pg rating of what I'm going for and I'm personally just kind of sensitive ot oversexualized imagery being in games. So i want some other way to convey that this is the ideal and the mutants are considered a waste because they don't meet it. very much a "I was a loser in high school" vibe I'm rying to convey here thematically. 
+
+some ideas for features: 
+
+createurs from the under help you
+
+slime falls and cuases mutations
+
+springy
+
+ideas form other games donkey kong country things you like 
+
+the fear of losing progres because you got a game over befofe a save point
+
+non-stop action no turns or menus
+
+helpers, npc
+
+physics climbing barrels make puzzles out fo the envioronment
+
+state mechanics and state machines built into the level design
+
+discovery
+
+when I was little I found passages what made it feel exciting? 
+
+- dark the possiblity of what was there
+
+new things
+
+feeling safe despite venturing into the unknown
+
+when a place feels safe because it is surrounded by something familliar but it is also new and exc iting all at conce, it is a place nobody knows about but you and people you know have discovered it and shown it to each other. 
+
+things I don't like from donkey kong country:
+
+getting ot really hard parts and being unable to save
+
+deterministic nature of the enemy scripting
+
+predictable ai 
+
+character stays the same
+
+once you discover a secret the novelty wears off
+
+the story is superficial
+
+you can't leave one character behind and come back to them later
+
+passages have a pretty deterministic way to go through them, there is the illusion of choice maintained pretty well but you are on rails, you can't break things or go in different directions. 
+
+more themes
+
+diversity is strength and sustains life. without diversity in all its forms, society will decay and become fvulnerable to destructive forces. 
+
+ways to express this
+
+trip clop abilities center around interaction with environment and helping friends he gets more of them by building things
+
+nerville's abilities are earned through experience or maybe other methods
+
+trip clop some more ideas
+
+shield for self and others
+
+set up teleport station s
+
+building the robot suit that will have projectile and other cool powers.
+
+nerville ideas 
+
+mnind contorl enemies (to use machinery, hurt each other)
+
+teleport
+
+telekinesis
+
+invisibility? 
+
+enemies coudl all look the same, they also often do things in the same way, which you can take advantagte of, this needs to be accentuated to emphasize the theme
+
+other ideas for theme, humans don't recognize the value of what they alread y have don'e ignore the lessons of your past or ignoree your valuable assets, a theme of self-affirmation despite negative signals from the outside world. 
+
+the world is one great structure you can make permanent changes to the structure to get from place to place, or affect the narrative in various waiys. the interplay between your character and the wordl shoudl reinforce the therme that things you experience should teach you lessons that you need to use later. and assets you ahve or discover shoudl be saved for their later value. For narrathve supporting the theme, the oworld is made up of abandoned prior civilization stuff, pprobably from an earlier earth. the opposiing forces did not valuew this place or the equipment left there and that will sow the seeds of the change you enact on their society. there are the possibilities here for multiple endings. Maybe you convince them to change but not in a campy way, mabe they are forced to see it due to some force or undeniable cr5isis, and depending on prior events and who is in power when you cause the crisis, they may or may not hold to some irrational position which seals their fate. 

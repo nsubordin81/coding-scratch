@@ -1,0 +1,19 @@
+Here's a plain text, TTS-ready version:
+
+Demonstrating Technical Leadership in Interviews
+
+The key is showing both depth and breadth while operating at the right level for each role. Here's your approach:
+
+Start with clarification and scope definition.Ask clarifying questions about requirements, constraints, and scale. Define assumptions explicitly. Identify the core problem versus symptoms. This shows senior-level thinking and prevents solving the wrong problem.
+
+Structure your response systematically.Break complex problems into components. Discuss trade-offs explicitly - performance versus maintainability, cost versus speed, and so on. Present multiple approaches when relevant. Show you can think beyond just making it work to making it work well.
+
+Demonstrate appropriate technical depth.For staff engineer roles, dive deep into system design, scalability, and technical leadership decisions. For solutions engineer roles, focus on practical implementation, customer needs, and bridging technical and business gaps. For solutions architect roles, emphasize high-level design, integration patterns, and strategic technical decisions.
+
+Show your collaborative mindset.Explain how you'd involve team members in decisions. Discuss how you'd communicate technical concepts to non-technical stakeholders. Mention considerations for team skills, maintenance burden, and knowledge transfer.
+
+Address the full lifecycle.Don't just design the solution - discuss deployment, monitoring, maintenance, and evolution. Consider failure modes and recovery strategies. Think about documentation and operational concerns.
+
+Use concrete examples from your experience.Reference similar problems you've solved. Mention specific technologies and their trade-offs. Show pattern recognition across different domains.
+
+The goal is proving you can think strategically while remaining grounded in practical implementation details.
