@@ -22,9 +22,25 @@ _problem list:_
 
   - for now I just used the experience file as-is it only involves a transleation of one of the meshes on the x by 2 and then the plane gets rotated -90 degrees and translated down a few units.
 
+- didn't really know all the parameters available for directional lighting
+
+  - postponing learning that api until I need to play around with lights more specifically.
+
+- didn't know whether to add the args to the boxgeometry or the position attribute to the parent mesh
+
+- receive shadow not working for game demo
+
+  - this turns out to be a setting that also has to be enabled on the3 Canvas element.
+
 - _I have trouble positioning things in 3d space with just an array of x y z coordinates_
 
 - _I am learning rapier_
+
+- forgot the syntax to import threejs, and I need to remember what the glob i mport significance is
+
+  - import \* as THREE from 'three'
+
+- learned a new pattern for setting the scale of the mesh and having meshes share geometries, hope I remember!
 
 _I don't know what StrictMode Component does other than that it renders the component twice I think which can cause duplicate content_
 
