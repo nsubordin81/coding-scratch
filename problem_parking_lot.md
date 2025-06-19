@@ -15,6 +15,10 @@
 
 #### Immediate problems
 
+using typescript is bothering the demo code I need to learn to set up proper type definitions for my code. there is a copilot converation about this.
+
+- I don't know why we need to useRef to animate
+
 _task:_ recreate scene without looking at the starter code.
 _problem list:_
 
@@ -35,6 +39,8 @@ _problem list:_
 - _I have trouble positioning things in 3d space with just an array of x y z coordinates_
 
 - _I am learning rapier_
+
+  - I don't know what kinematic position is
 
 - forgot the syntax to import threejs, and I need to remember what the glob i mport significance is
 
