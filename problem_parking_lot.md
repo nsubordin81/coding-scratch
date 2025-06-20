@@ -40,6 +40,8 @@ _problem list:_
 
 - _I am learning rapier_
 
+- I need to nkow about transformer architecture
+
   - I don't know what kinematic position is
 
 - forgot the syntax to import threejs, and I need to remember what the glob i mport significance is
